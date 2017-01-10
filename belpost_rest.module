@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * Implements of hook_services_resources().
+ * To provide new services.
+ */
+function belpost_rest_services_resources() {
+  $api = array(
+    'belpost' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves single belpost entity',
+          'callback' => 'belpost_rest_get_belpost_parser',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'args' => array(
+            array(
+              'name' => 'pid',
+              'type' => 'int',
+              'description' => '',
+              'source' => array('path' => '0'),
+              'optional' => FALSE,
+            ),
+          ),
+        ),
+        'index' => array(
+          'help' => 'Retrieves all belpost entities',
+          'callback' => 'belpost_rest_get_all_belpost_parser',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'args' => array(),
+        ),
+      ),
+    ),
+  );
+
+  return $api;
+}
+
+/**
+ * A function to load a single registered entity of belpost_parser.
+ * @param type $pid
+ * @return type
+ */
+function belpost_rest_get_belpost_parser($pid) {
+  $entity = entity_load_single('belpost_parser', $pid);
+  return $entity;
+}
+
+/**
+ * A function to load all registered entities of belpost_parser.
+ * @return type
+ */
+function belpost_rest_get_all_belpost_parser() {
+  $e = entity_load('belpost_parser');
+  return $e;
+}

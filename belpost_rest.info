@@ -1,0 +1,6 @@
+name = Belpost REST
+description = A module provides functionality to manage parsed data.
+core = 7.x
+
+dependecies[] = entity
+dependecies[] = belpost_parser
